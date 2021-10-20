@@ -1,5 +1,7 @@
 package de.neuefische.devquiz.security.config;
 
+import de.neuefische.devquiz.security.service.AppUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,13 +12,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final AppUserDetailService appUserDetailService;
+
+    @Autowired
+    public SecurityConfig(AppUserDetailService appUserDetailService) {
+        this.appUserDetailService = appUserDetailService;
+    }
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("BobTheBuilder")
-                .password("Building777")
-                .roles("USER");
+        auth.userDetailsService(appUserDetailService);
     }
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return NoOpPasswordEncoder.getInstance();
