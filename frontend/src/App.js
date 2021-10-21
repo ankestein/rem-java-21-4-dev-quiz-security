@@ -1,6 +1,6 @@
 import Header from './components/Header'
 import './App.css'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, useHistory} from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import AddQuestion from './pages/Add-Question'
 import useQuestions from './hooks/useQuestions'
@@ -16,6 +16,7 @@ function App() {
     const [playQuestion, setPlayQuestion] = useState()
     const [token, setToken] = useState()
     const {questions, saveQuestion} = useQuestions(token)
+    const history = useHistory();
 
     const getNextQuestion = () => {
         getQuestion().then(result => {
@@ -31,8 +32,8 @@ function App() {
     const login = (credentials) => {
         return axios.post('/auth/login', credentials)
             .then(response => response.data)
-            //.then(token => console.log(token))
             .then(token => setToken(token))
+            .then(() => history.push("/"))
             .catch(error => console.error(error.message))
     }
 
