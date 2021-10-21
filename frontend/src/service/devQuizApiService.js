@@ -7,6 +7,7 @@ export function getQuestions() {
 
 }
 
+
 export function addQuestion(newQuestion) {
   return axios
     .post('/api/question', newQuestion)
@@ -14,12 +15,16 @@ export function addQuestion(newQuestion) {
     .catch(console.error)
 }
 
+
 export function getQuestion(){
   return axios
       .get('/api/question/quiz')
       .then(response => response.data)
       .catch(console.error)
 }
+
+
+
 export function checkAnswer(question, chosenId){
 
   const answerValidation = {
@@ -29,6 +34,14 @@ export function checkAnswer(question, chosenId){
 
   return axios
       .post('/api/question/quiz', answerValidation )
+      .then(response => response.data)
+      .catch(console.error)
+}
+
+
+export function postUser(userData) {
+  return axios
+      .post('/auth/login', userData)
       .then(response => response.data)
       .catch(console.error)
 }

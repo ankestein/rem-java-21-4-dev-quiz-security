@@ -7,6 +7,7 @@ import useQuestions from './hooks/useQuestions'
 import Play from "./pages/Play";
 import {useEffect, useState} from "react";
 import {getQuestion} from "./service/devQuizApiService";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
 
@@ -35,6 +36,9 @@ function App() {
                 </Route>
                 <Route path="/play">
                     {playQuestion && <Play question={playQuestion} playNext={getNextQuestion}/>}
+                </Route>
+                <Route path="/login">
+                    <LoginPage />
                 </Route>
             </Switch>
         </div>
