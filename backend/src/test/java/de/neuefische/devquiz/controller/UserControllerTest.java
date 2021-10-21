@@ -4,16 +4,13 @@ import de.neuefische.devquiz.security.model.AppUser;
 import de.neuefische.devquiz.security.model.UserResponseDto;
 import de.neuefische.devquiz.security.repo.AppUserRepo;
 import de.neuefische.devquiz.security.service.JWTUtilService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 
@@ -22,6 +19,7 @@ import static org.hamcrest.Matchers.is;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@TestPropertySource(properties = "neuefische.devquiz.jwt.secret=my-super-secret")
 public class UserControllerTest {
 
     @Autowired
@@ -77,6 +75,10 @@ public class UserControllerTest {
 
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.FORBIDDEN));
+
+        // reset duration to four hours such that all tests run in a row => problematic, if at some point we change duration to something else in JWTUtilService
+        ReflectionTestUtils.setField(jwtUtilService, "duration", 60 * 60 * 4 * 1000);
+
     }
 
 
