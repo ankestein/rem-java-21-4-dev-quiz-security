@@ -2,6 +2,7 @@ package de.neuefische.devquiz.security.filter;
 
 import de.neuefische.devquiz.security.service.JWTUtilService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -28,12 +29,22 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = getAuthToken(request);
 
-        log.info("received token: " + token);
+        try {
+            if (token != null && !token.isBlank()) {
+                String username = jwtUtils.extractUsername(token);
+                setSecurityContext(username);
+            }
+        } catch(Exception e){
+            throw new AccessDeniedException("No valid token! Access denied!", e);
+        }
 
         filterChain.doFilter(request, response);
     }
 
-
+    private void setSecurityContext(String username) {
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, "", List.of());
+        SecurityContextHolder.getContext().setAuthentication(authToken);
+    }
 
     private String getAuthToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");

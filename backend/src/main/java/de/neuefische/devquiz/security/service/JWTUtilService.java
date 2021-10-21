@@ -29,4 +29,9 @@ public class JWTUtilService {
                 .compact();
     }
 
+    public String extractUsername(String token) {
+        Claims claims = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();
+        return claims.getSubject();
+    }
+
 }
