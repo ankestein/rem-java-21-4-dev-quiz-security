@@ -36,8 +36,6 @@ function App() {
             .catch(error => console.error(error.message))
     }
 
-    console.log(token)
-
      return (
         <div className="App">
             <Header/>
