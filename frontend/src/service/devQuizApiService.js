@@ -38,10 +38,3 @@ export function checkAnswer(question, chosenId){
       .catch(console.error)
 }
 
-
-export function postUser(userData) {
-  return axios
-      .post('/auth/login', userData)
-      .then(response => response.data)
-      .catch(console.error)
-}

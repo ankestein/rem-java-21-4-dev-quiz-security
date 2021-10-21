@@ -8,11 +8,14 @@ import Play from "./pages/Play";
 import {useEffect, useState} from "react";
 import {getQuestion} from "./service/devQuizApiService";
 import LoginPage from "./pages/LoginPage";
+import axios from "axios";
+
 
 function App() {
 
-    const {questions, saveQuestion} = useQuestions()
     const [playQuestion, setPlayQuestion] = useState()
+    const [token, setToken] = useState()
+    const {questions, saveQuestion} = useQuestions(token)
 
     const getNextQuestion = () => {
         getQuestion().then(result => {
@@ -24,10 +27,24 @@ function App() {
         getNextQuestion();
     }, []);
 
+
+    const login = (credentials) => {
+        return axios.post('/auth/login', credentials)
+            .then(response => response.data)
+            //.then(token => console.log(token))
+            .then(token => setToken(token))
+            .catch(error => console.error(error.message))
+    }
+
+    console.log(token)
+
      return (
         <div className="App">
             <Header/>
             <Switch>
+                <Route path="/login">
+                    <LoginPage login={login}/>
+                </Route>
                 <Route exact path="/">
                     <Homepage questions={questions}/>
                 </Route>
@@ -36,9 +53,6 @@ function App() {
                 </Route>
                 <Route path="/play">
                     {playQuestion && <Play question={playQuestion} playNext={getNextQuestion}/>}
-                </Route>
-                <Route path="/login">
-                    <LoginPage />
                 </Route>
             </Switch>
         </div>
