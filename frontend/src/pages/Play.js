@@ -9,20 +9,20 @@ Play.propTypes = {
     question: PropTypes.object
 }
 
-export default function Play({question, playNext}) {
+export default function Play({question, playNext, token}) {
 
 const [answerIsCorrect, setAnswerIsCorrect] = useState();
 
 const resetAnswers = () => setAnswerIsCorrect();
 
-const checkIfCorrect = (question, chosenId) => {
-    checkAnswer(question, chosenId).then((data) => setAnswerIsCorrect(data))
+const checkIfCorrect = (question, chosenId, token) => {
+    checkAnswer(question, chosenId, token).then((data) => setAnswerIsCorrect(data))
 }
 
     return (
         <div>
             <QuestionsContainer>
-                <Question question={question} checkIfCorrect={checkIfCorrect} answerIsCorrect={answerIsCorrect} playNext={playNext} resetAnswers={resetAnswers}/>
+                <Question question={question} token={token} checkIfCorrect={checkIfCorrect} answerIsCorrect={answerIsCorrect} playNext={playNext} resetAnswers={resetAnswers}/>
             </QuestionsContainer>
         </div>
     )

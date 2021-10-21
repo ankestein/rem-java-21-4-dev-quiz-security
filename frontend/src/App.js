@@ -19,14 +19,14 @@ function App() {
     const history = useHistory();
 
     const getNextQuestion = () => {
-        getQuestion().then(result => {
+        getQuestion(token).then(result => {
             setPlayQuestion(result)
         })
     }
 
     useEffect(() => {
         getNextQuestion();
-    }, []);
+    }, [token]);
 
 
     const login = (credentials) => {
@@ -51,7 +51,7 @@ function App() {
                     <AddQuestion saveQuestion={saveQuestion}/>
                 </Route>
                 <Route path="/play">
-                    {playQuestion && <Play question={playQuestion} playNext={getNextQuestion}/>}
+                    {playQuestion && <Play question={playQuestion} playNext={getNextQuestion} token={token}/>}
                 </Route>
             </Switch>
         </div>

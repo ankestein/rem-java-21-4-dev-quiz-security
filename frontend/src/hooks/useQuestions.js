@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 export default function useQuestions(token) {
   const [questions, setQuestions] = useState([])
 
-  const getAllQuestions = (token) => {
+  const getAllQuestions = () => {
     getQuestions(token).then(result => setQuestions(result))
         .catch(err => console.error(err))
   }
