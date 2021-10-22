@@ -23,7 +23,7 @@ export default function LoginPage({login}) {
     return (
         <Form onSubmit={handleSubmit}>
             <label>Username
-                <Input type="text"
+                <input type="text"
                        value={credentials.username}
                        placeholder="Enter username"
                        required="required"
@@ -32,7 +32,7 @@ export default function LoginPage({login}) {
             </label>
 
             <label>Password
-                <Input type="text"
+                <input type="password"
                        value={credentials.password}
                        placeholder="Enter password"
                        required="required"
@@ -48,14 +48,12 @@ export default function LoginPage({login}) {
 }
 
 const Form = styled.form`
-  width: 200px;
+  width: 175px;
   margin: 40px auto;
   display: flex;
   flex-direction: column;
   gap: 40px;
   text-align: center;
-`
-
-const Input = styled.input`
-  display: flex;
+  font-family: sans-serif;
+  padding: 0;
 `
