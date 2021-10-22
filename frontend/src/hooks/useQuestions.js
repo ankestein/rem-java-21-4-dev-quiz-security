@@ -15,7 +15,7 @@ export default function useQuestions(token) {
   }, [token])
 
   const saveQuestion = newQuestion => {
-    addQuestion(newQuestion, token).then(getAllQuestions(token))
+    addQuestion(newQuestion, token).then(() => getAllQuestions(token))
   }
   return {
     getAllQuestions,
