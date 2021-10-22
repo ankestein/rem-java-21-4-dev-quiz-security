@@ -3,13 +3,13 @@ import Answer from './Answer'
 import styled from 'styled-components'
 import {useState} from "react";
 
-function Question({question, checkIfCorrect, answerIsCorrect, playNext, resetAnswers}) {
+function Question({question, checkIfCorrect, answerIsCorrect, playNext, resetAnswers, token}) {
 
     const [chosenId, setChosenId] = useState("")
 
     const validateAnswer = event => {
         event.preventDefault()
-        checkIfCorrect(question, chosenId)
+        checkIfCorrect(question, chosenId, token)
     }
 
     const playNextQuestion = () => {
