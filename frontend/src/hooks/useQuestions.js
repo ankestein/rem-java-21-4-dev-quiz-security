@@ -11,6 +11,7 @@ export default function useQuestions(token) {
 
   useEffect(() => {
     getAllQuestions(token)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])
 
   const saveQuestion = newQuestion => {

@@ -26,6 +26,7 @@ function App() {
 
     useEffect(() => {
         getNextQuestion();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
 
