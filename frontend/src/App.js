@@ -10,6 +10,7 @@ import {getQuestion} from "./service/devQuizApiService";
 import LoginPage from "./pages/LoginPage";
 
 import {AuthContext} from "./context/AuthProvider";
+import PrivateRoute from "./routing/PrivateRoute";
 
 function App() {
     const [playQuestion, setPlayQuestion] = useState()
@@ -36,18 +37,15 @@ function App() {
                     <Route path="/login">
                         <LoginPage/>
                     </Route>
-                    <Route exact path="/">
+                    <PrivateRoute exact path="/">
                         <Homepage questions={questions}/>
-                    </Route>
-                    <Route exact path="/add-question">
+                    </PrivateRoute>
+                    <PrivateRoute exact path="/add-question">
                         <AddQuestion saveQuestion={saveQuestion}/>
-                    </Route>
-                    <Route path="/play">
-                        {console.log("Route play")}
-                        {console.log(playQuestion)}
-                        {console.log(questions)}
+                    </PrivateRoute>
+                    <PrivateRoute path="/play">
                         {playQuestion && <Play question={playQuestion} playNext={getNextQuestion}/>}
-                    </Route>
+                    </PrivateRoute>
                 </Switch>
             </div>
 
