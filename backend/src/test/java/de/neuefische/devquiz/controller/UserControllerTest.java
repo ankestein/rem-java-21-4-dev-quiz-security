@@ -7,6 +7,7 @@ import de.neuefische.devquiz.security.service.JWTUtilService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,8 @@ import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -31,7 +34,7 @@ public class UserControllerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    @Autowired
+    @SpyBean
     private JWTUtilService jwtUtilService;
 
 
@@ -66,8 +69,7 @@ public class UserControllerTest {
     public void getLoggedInUserWithExpiredTokenTest() {
         // GIVEN
         HttpHeaders headers = new HttpHeaders();
-
-        ReflectionTestUtils.setField(jwtUtilService, "duration", 1);
+        when(jwtUtilService.getDuration()).thenReturn(1L);
         headers.setBearerAuth(jwtUtilService.createToken(new HashMap<>(), "test-username"));
 
         // WHEN
@@ -75,9 +77,7 @@ public class UserControllerTest {
 
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.FORBIDDEN));
-
-        // reset duration to four hours such that all tests run in a row => problematic, if at some point we change duration to something else in JWTUtilService
-        ReflectionTestUtils.setField(jwtUtilService, "duration", 60 * 60 * 4 * 1000);
+        verify(jwtUtilService).getDuration();
 
     }
 
