@@ -3,15 +3,17 @@ import Question from "../components/Question";
 import * as React from "react";
 import * as PropTypes from "prop-types";
 import {checkAnswer} from "../service/devQuizApiService";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {AuthContext} from "../context/AuthProvider";
 
 Play.propTypes = {
     question: PropTypes.object
 }
 
-export default function Play({question, playNext, token}) {
+export default function Play({question, playNext}) {
 
 const [answerIsCorrect, setAnswerIsCorrect] = useState();
+const {token} = useContext(AuthContext)
 
 const resetAnswers = () => setAnswerIsCorrect();
 

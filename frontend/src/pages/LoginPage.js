@@ -1,14 +1,16 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import styled from "styled-components/macro";
+import {AuthContext} from "../context/AuthProvider";
 
 const initialCredentials = {
     username: "",
     password: ""
 }
 
-export default function LoginPage({login}) {
+export default function LoginPage() {
 
     const [credentials, setCredentials] = useState(initialCredentials)
+    const {login} = useContext(AuthContext)
 
     const handleChange = event => {
         setCredentials({...credentials, [event.target.name] : event.target.value})
