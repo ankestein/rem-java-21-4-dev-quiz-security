@@ -1,6 +1,7 @@
 package de.neuefische.devquiz.security.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,8 +9,12 @@ import lombok.Data;
 @Builder
 public class GitHubOAuthCredentialsDto {
 
+    @JsonProperty("client_id")
     String clientId;
+
+    @JsonProperty("client_secret")
     String clientSecret;
+
     String code;
 
 }
