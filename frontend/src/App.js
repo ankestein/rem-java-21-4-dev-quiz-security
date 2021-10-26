@@ -8,6 +8,7 @@ import Play from "./pages/Play";
 import {useContext, useEffect, useState} from "react";
 import {getQuestion} from "./service/devQuizApiService";
 import LoginPage from "./pages/LoginPage";
+import OAuthGitHubRedirect from "./pages/OAuthGitHubRedirect";
 
 import {AuthContext} from "./context/AuthProvider";
 import PrivateRoute from "./routing/PrivateRoute";
@@ -36,6 +37,9 @@ function App() {
                 <Switch>
                     <Route path="/login">
                         <LoginPage/>
+                    </Route>
+                    <Route path="/oauth/github/redirect">
+                        <OAuthGitHubRedirect/>
                     </Route>
                     <PrivateRoute exact path="/">
                         <Homepage questions={questions}/>
