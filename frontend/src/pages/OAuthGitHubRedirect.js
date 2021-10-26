@@ -13,10 +13,6 @@ export default function OAuthGitHubRedirect() {
         loginWithGitHub(code)
     }, [code])
 
-    console.log(`The params are: ${queryParameter}`)
-    console.log(`The code is: ${code}`)
-    console.log("test")
-
     return (
         <StyledDiv>
             <p>You are being redirected...</p>
