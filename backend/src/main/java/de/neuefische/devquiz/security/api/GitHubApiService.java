@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@Slf4j
 @Service
 public class GitHubApiService {
 
@@ -51,9 +50,6 @@ public class GitHubApiService {
             throw new GitHubAuthException("Error while authenticating with code via GitHub! Body is null!");
         }
 
-        log.info("HERE IS THE RESPONSE: " + responseEntity);
-        log.info("HERE IS THE RESPONSE BODY: " + responseEntity.getBody());
-        log.info("HERE IS THE GITHUB ACCESS TOKEN: " + responseEntity.getBody().getGitHubAccessToken());
         return (responseEntity.getBody().getGitHubAccessToken());
 
     }
