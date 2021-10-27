@@ -29,7 +29,7 @@ class LoginControllerTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Value("${neuefische.devquiz.jwt.secret}")
+    @Value("${de.neuefische.devquiz.jwt.secret}")
     private String JWT_SECRET;
 
     @Test

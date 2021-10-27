@@ -13,9 +13,12 @@ import java.util.List;
 @Service
 public class GitHubApiService {
 
-    private String clientId = "20bd6360403e3e1711a8";
+    private RestTemplate restTemplate;
 
-    @Value("${neuefische.devquiz.github.secret")
+    @Value("${de.neuefische.devquiz.github.clientId}")
+    private String clientId;
+
+    @Value("${de.neuefische.devquiz.github.secret}")
     private String clientSecret;
 
     private RestTemplate restTemplate;
