@@ -14,11 +14,12 @@ public class GitHubLoginService {
     }
 
     public String verifyGitHubLogin(String code) {
-        // return access token
 
-        String accessToken =  gitHubApiService.getGitHubAccessToken(code);
-        System.out.println("THIS IS THE ACCESS TOKEN: " + accessToken);
-        return accessToken;
+        String gitHubAccessToken =  gitHubApiService.getGitHubAccessToken(code);
+        //System.out.println("THIS IS THE ACCESS TOKEN: " + gitHubAccessToken);
+        return gitHubAccessToken;
+
+
     }
 
 

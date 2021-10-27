@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class GitHubAccessTokenDto {
 
-    private String accessToken;
+    private String gitHubAccessToken;
 }

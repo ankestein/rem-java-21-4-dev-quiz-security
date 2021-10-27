@@ -14,20 +14,20 @@ public class GitHubLoginController {
     private final GitHubLoginService gitHubLoginService;
 
     @Autowired
-    public GitHubLoginController(GitHubLoginService gitHubLoginService){
+    public GitHubLoginController(GitHubLoginService gitHubLoginService) {
         this.gitHubLoginService = gitHubLoginService;
     }
 
     @PostMapping
     public String login(@RequestBody String code) {
 
-       // return gitHubLoginService.verifyGitHubLogin(code);
-        String accessToken = gitHubLoginService.verifyGitHubLogin(code);
+        // Verify code via GitHub by getting a GitHub AccessToken
+        String gitHubAccessToken = gitHubLoginService.verifyGitHubLogin(code);
 
-        System.out.println("THIS IS THE ACCESS TOKEN: " + accessToken);
-        return accessToken;
+        System.out.println("THIS IS THE ACCESS TOKEN: " + gitHubAccessToken);
+        return gitHubAccessToken;
         // service for post request
-       // return GitHubAccessToken;
+        // return GitHubAccessToken;
     }
 
 

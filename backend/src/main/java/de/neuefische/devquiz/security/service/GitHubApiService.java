@@ -35,7 +35,7 @@ public class GitHubApiService {
                 HttpMethod.POST, new HttpEntity<>(credentialsDto, httpHeaders), GitHubAccessTokenDto.class );
 
         System.out.println("HERE IS THE RESPONSE: " + responseEntity);
-        return(responseEntity.getBody().getAccessToken());
+        return(responseEntity.getBody().getGitHubAccessToken());
 
     }
 }
