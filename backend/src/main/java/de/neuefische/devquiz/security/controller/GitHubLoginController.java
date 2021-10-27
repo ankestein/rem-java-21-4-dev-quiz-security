@@ -1,5 +1,6 @@
 package de.neuefische.devquiz.security.controller;
 
+import de.neuefische.devquiz.security.model.GitHubLoginDto;
 import de.neuefische.devquiz.security.service.GitHubLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,10 +20,10 @@ public class GitHubLoginController {
     }
 
     @PostMapping
-    public String login(@RequestBody String code) {
+    public String login(@RequestBody GitHubLoginDto gitHubLoginDto) {
 
         // Verify code via GitHub by getting a GitHub AccessToken
-        String gitHubAccessToken = gitHubLoginService.verifyGitHubLogin(code);
+        String gitHubAccessToken = gitHubLoginService.verifyGitHubLogin(gitHubLoginDto.getCode());
 
         System.out.println("THIS IS THE ACCESS TOKEN: " + gitHubAccessToken);
         return gitHubAccessToken;
