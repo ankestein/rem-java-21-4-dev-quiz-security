@@ -15,9 +15,16 @@ public class GitHubLoginService {
 
     public String verifyGitHubLogin(String code) {
 
+        // Verify code via GitHub
         String gitHubAccessToken =  gitHubApiService.getGitHubAccessToken(code);
         //System.out.println("THIS IS THE ACCESS TOKEN: " + gitHubAccessToken);
         return gitHubAccessToken;
+
+
+        // Retrieve User Information
+
+
+        // Create JWT access token
 
 
     }

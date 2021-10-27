@@ -1,5 +1,6 @@
 package de.neuefische.devquiz.security.service;
 
+import de.neuefische.devquiz.controller.exception.GitHubAuthException;
 import de.neuefische.devquiz.security.model.GitHubAccessTokenDto;
 import de.neuefische.devquiz.security.model.GitHubOAuthCredentialsDto;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +14,7 @@ import java.util.List;
 @Service
 public class GitHubApiService {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     @Value("${de.neuefische.devquiz.github.clientId}")
     private String clientId;
@@ -33,14 +34,20 @@ public class GitHubApiService {
                 .build();
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        //httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
 
-        ResponseEntity<GitHubAccessTokenDto> responseEntity = restTemplate.exchange("https://github.com/login/oauth/access_token",
-                HttpMethod.POST, new HttpEntity<>(credentialsDto, httpHeaders), GitHubAccessTokenDto.class );
+        ResponseEntity<GitHubAccessTokenDto> responseEntity = restTemplate.exchange(
+                "https://github.com/login/oauth/access_token",
+                HttpMethod.POST,
+                new HttpEntity<>(credentialsDto, httpHeaders),
+                GitHubAccessTokenDto.class);
+
+        if(responseEntity.getBody() == null){
+            throw new GitHubAuthException("Error while authenticating with code via GitHub! Body is null!");
+        }
 
         System.out.println("HERE IS THE RESPONSE: " + responseEntity);
-        return(responseEntity.getBody().getGitHubAccessToken());
+        return (responseEntity.getBody().getGitHubAccessToken());
 
     }
 }
