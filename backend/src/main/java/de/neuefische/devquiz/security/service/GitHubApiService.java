@@ -21,7 +21,9 @@ public class GitHubApiService {
     @Value("${de.neuefische.devquiz.github.secret}")
     private String clientSecret;
 
-    private RestTemplate restTemplate;
+    public GitHubApiService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public String getGitHubAccessToken(String code) {
         GitHubOAuthCredentialsDto credentialsDto = GitHubOAuthCredentialsDto.builder()
