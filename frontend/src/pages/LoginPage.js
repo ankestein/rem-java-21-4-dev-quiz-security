@@ -52,9 +52,10 @@ export default function LoginPage() {
                 </label>
 
                 <button>Sign in</button>
+                <button type="button" onClick={handleClick}>Log in with GitHub</button>
             </Form>
 
-            <button onClick={handleClick}>Log in with GitHub</button>
+
 
         </>
 
