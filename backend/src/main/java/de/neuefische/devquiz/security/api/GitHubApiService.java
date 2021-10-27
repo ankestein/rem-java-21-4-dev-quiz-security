@@ -52,7 +52,8 @@ public class GitHubApiService {
         }
 
         log.info("HERE IS THE RESPONSE: " + responseEntity);
-        log.error("HERE IS THE RESPONSE: " + responseEntity);
+        log.info("HERE IS THE RESPONSE BODY: " + responseEntity.getBody());
+        log.info("HERE IS THE GITHUB ACCESS TOKEN: " + responseEntity.getBody().getGitHubAccessToken());
         return (responseEntity.getBody().getGitHubAccessToken());
 
     }

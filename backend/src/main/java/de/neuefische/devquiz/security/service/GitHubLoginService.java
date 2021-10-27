@@ -4,15 +4,18 @@ import de.neuefische.devquiz.security.api.GitHubApiService;
 import de.neuefische.devquiz.security.model.GitHubUserDto;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 
 
 @Service
 public class GitHubLoginService {
 
     private final GitHubApiService gitHubApiService;
+    private final JWTUtilService jwtUtilService;
 
-    public GitHubLoginService(GitHubApiService gitHubApiService) {
+    public GitHubLoginService(GitHubApiService gitHubApiService, JWTUtilService jwtUtilService) {
         this.gitHubApiService = gitHubApiService;
+        this.jwtUtilService = jwtUtilService;
     }
 
     public String verifyGitHubLogin(String code) {
@@ -24,12 +27,8 @@ public class GitHubLoginService {
         GitHubUserDto gitHubUserDto = gitHubApiService.getUserInfo(gitHubAccessToken);
 
         // Create JWT access token
-        return null;
+        return jwtUtilService.createToken(new HashMap<>(), gitHubUserDto.getLogin());
     }
-
-
-
-
 
 }
 

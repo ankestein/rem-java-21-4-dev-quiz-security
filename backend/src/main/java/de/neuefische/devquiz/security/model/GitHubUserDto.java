@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class GitHubUserDto {
 
-    private String gitHubUserName;
+    private String login;
 }

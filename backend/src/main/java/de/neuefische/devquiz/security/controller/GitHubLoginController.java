@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
+
 @RestController
 @RequestMapping("/auth/github/login")
 public class GitHubLoginController {
@@ -23,15 +23,7 @@ public class GitHubLoginController {
 
     @PostMapping
     public String login(@RequestBody GitHubLoginDto gitHubLoginDto) {
-
-        // Verify code via GitHub by getting a GitHub AccessToken
-        String gitHubAccessToken = gitHubLoginService.verifyGitHubLogin(gitHubLoginDto.getCode());
-
-        log.error("THIS IS THE ACCESS TOKEN: " + gitHubAccessToken);
-
-        return gitHubAccessToken;
-        // service for post request
-        // return GitHubAccessToken;
+        return gitHubLoginService.verifyGitHubLogin(gitHubLoginDto.getCode());
     }
 
 
