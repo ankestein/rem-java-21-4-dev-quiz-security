@@ -17,7 +17,7 @@ export default function AuthProvider({children}) {
     }
 
     const loginWithGitHub = (code) => {
-        return axios.post('/auth/github/login', code)
+        return axios.post('/auth/github/login', {code})
             .then(response => response.data)
             .then(token => setToken(token))
             .then(() => history.push("/"))

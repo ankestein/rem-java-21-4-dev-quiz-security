@@ -11,11 +11,12 @@ export default function OAuthGitHubRedirect() {
 
     useEffect(() => {
         loginWithGitHub(code)
+        //eslint-disable-next-line
     }, [code])
 
     return (
         <StyledDiv>
-            <p>You are being redirected...</p>
+            <p>Logging in...</p>
             <p>{`The params are: ${queryParameter}`}</p>
             <p>{`The code is: ${code}`}</p>
         </StyledDiv>

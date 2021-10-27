@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import styled from "styled-components/macro";
 import {AuthContext} from "../context/AuthProvider";
 import {useHistory} from "react-router-dom";
-import {sendClientId} from "../service/devQuizApiService";
+
 
 const initialCredentials = {
     username: "",
