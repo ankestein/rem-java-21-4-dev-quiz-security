@@ -2,6 +2,7 @@ import {useContext, useState} from "react";
 import styled from "styled-components/macro";
 import {AuthContext} from "../context/AuthProvider";
 import {useHistory} from "react-router-dom";
+import {Button, TextField} from "@mui/material";
 
 
 const initialCredentials = {
@@ -33,29 +34,24 @@ export default function LoginPage() {
     return (
         <>
             <Form onSubmit={handleSubmit}>
-                <label>Username
-                    <input type="text"
+                    <TextField variant="standard" type="text"
                            value={credentials.username}
                            placeholder="Enter username"
                            required="required"
                            name="username"
                            onChange={handleChange}/>
-                </label>
 
-                <label>Password
-                    <input type="password"
+                    <TextField variant="standard" type="password"
                            value={credentials.password}
                            placeholder="Enter password"
                            required="required"
                            name="password"
                            onChange={handleChange}/>
-                </label>
 
-                <button>Sign in</button>
-                <button type="button" onClick={handleClick}>Log in with GitHub</button>
+
+                <StyledButton>Sign in</StyledButton>
+                <StyledButton type="button" onClick={handleClick}>Log in with GitHub</StyledButton>
             </Form>
-
-
 
         </>
 
@@ -74,4 +70,10 @@ const Form = styled.form`
   text-align: center;
   font-family: sans-serif;
   padding: 0;
+`
+
+const StyledButton = styled(Button)`
+  && {
+    color: steelblue;
+  }
 `
