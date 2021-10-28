@@ -14,7 +14,7 @@ import java.util.HashMap;
 @Service
 public class JWTUtilService {
 
-    @Value("{$de.neuefische.devquiz.jwt.secret}")
+    @Value("${de.neuefische.devquiz.jwt.secret}")
     private String JWT_SECRET;
 
     private long duration = 60 * 60 * 4 * 1000;
